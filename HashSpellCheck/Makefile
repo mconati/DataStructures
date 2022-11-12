@@ -17,7 +17,7 @@ CXXFLAGS = -g -std=c++1z -Wall -Wextra -pedantic
 # TARGETS is the list of all programs created when we do "make all"
 #   (and which should be deleted when we do "make clean")
 
-TARGETS = stringhash-test hashset-cow-test myspell
+TARGETS = stringhash-test hashset-cow-test our-tests myspell
 
 ###############################################################################
 # "PHONY" (BUT USEFUL) MAKEFILE TARGETS
@@ -63,6 +63,9 @@ stringhash-test: stringhash-test.o stringhash.o
 hashset-cow-test: hashset-cow-test.o testing-logger.o
 	$(CXX) -o hashset-cow-test $^
 
+our-tests: our-tests.o testing-logger.o
+	$(CXX) -o our-tests $^
+
 myspell: myspell.o stringhash.o 
 	$(CXX) -o myspell $^
 
@@ -77,6 +80,9 @@ myspell: myspell.o stringhash.o
 
 hashset-cow-test.o: hashset-cow-test.cpp hashset.hpp hashset-private.hpp testing-logger.hpp
 	$(CXX) $(CXXFLAGS) -c hashset-cow-test.cpp
+
+our-tests.o: our-tests.cpp hashset.hpp hashset-private.hpp testing-logger.hpp
+	$(CXX) $(CXXFLAGS) -c our-tests.cpp
 
 # Or we can take advantage of the implicit .cpp-to-.o rule
 stringhash.o: stringhash.cpp stringhash.hpp

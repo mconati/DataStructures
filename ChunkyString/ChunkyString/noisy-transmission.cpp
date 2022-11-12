@@ -11,7 +11,9 @@
  * \remarks
  *
  */
-
+#include <fstream>
+#include <iostream>
+#include <random>
 #include "noisy-transmission.hpp"
 #include <stdexcept>
 #include "chunkystring.hpp"
@@ -29,5 +31,18 @@ void NoisyTransmission::seed() {
 float NoisyTransmission::getRandomFloat() { return dis_(gen_); }
 
 void NoisyTransmission::transmit(ChunkyString& message) {
-  throw std::logic_error("Not yet implemented");
+  // set up random value
+  float p = 0; // <- fix
+  for (auto j = message.begin(); j != message.end(); ++j) {
+    p = getRandomFloat();
+    if (p < errorRate_) {
+      // delete based on error rate chance
+      message.erase(j);
+    } else if (p < (2 * errorRate_)) {
+      // duplicate based on error rate chance
+      message.insert(j, *j);
+    } else {
+      // otherwise do nothing :)
+    }
+  }
 }

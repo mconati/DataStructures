@@ -142,7 +142,6 @@ int main() {
 
   // Add calls to your tests here...
   affirm(cowTestSuite());
-
   if (alltests.summarize(true)) {
     return 0;  // Error code of 0 == Success!
   } else {

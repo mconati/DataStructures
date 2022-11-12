@@ -97,17 +97,35 @@ yay: bay day gay hay jay lay may nay pay ray say way
 
 \subsection hashfunction Our Hash Function
 
-...here you would briefly introduce the three hash functions
-you experimented with, the tests you ran, and the results that
-caused you to make your choice...
+We tested two hash functions that relied on bitshifting and
+magic prime numbers (33 for djb2 and 6599 for sdbm) along with one 
+function that uses the prime multiplier 37 to assign buckets (which we called In class).
+We tested our funtions by running them with a 35,000 word dictionary. 
+Our tests consisted on hashing with a small number of buckets(10),
+a large number of buckets(10000), and the magic primes that each
+function uses(33, 37, and 6599). For the small bucket test, we found that 
+In class had the highest average items per non empty bucket and the 
+lowest maximum items per bucket. For the large bucket test, we found that 
+In class was average in both average items per non empty bucket and 
+maximum items per bucket. Finally, we found that each hash function struggled
+with bucket amounts that were multiples of their prime. Over all tests, In class
+had the best Average Avalanche numbers, but was a couple ms slower than the other
+functions. Since In class was average or above average in all categories of our 
+tests other than speed, we decided to use this function for our hash table.
 
 \subsection hashtable Our Hash Table
 
 ...here you would (very) briefly explain what kind of hash table you
 implemented, and why you chose it...
+We implemented a separate chaining hash table because it has the best 
+successful search performance and it seemed most straightforward to 
+implement. To resolve collisions, we can just push back the new insertee
+to the same index since we are using separate chaining.
 
-...here you would briefly state the load factor you settled on,
-and your justification for choosing that particular value...
-
+We decided on a load factor of 0.5 because we wanted to have good hash performance,
+specifically for a successful search of the hash table.
+Looking at the lecture slides for performance at different load factors, we 
+noticed that we could avoid the dangerous exponential region of low performance
+if we kept our hash value at or below the elbow of the curve (around .5). 
 */
 

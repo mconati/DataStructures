@@ -44,8 +44,8 @@ noisy-transmission.o: noisy-transmission.cpp noisy-transmission.hpp chunkystring
 
 message-passer.o: message-passer.cpp noisy-transmission.hpp chunkystring.hpp
 
-messagepasser: chunkystring.o message-passer.o noisy-transmission.o
-	$(CXX) -o messagepasser chunkystring.o message-passer.o noisy-transmission.o
+messagepasser: chunkystring.o message-passer.o noisy-transmission.o iterator.o
+	$(CXX) -o messagepasser chunkystring.o message-passer.o noisy-transmission.o iterator.o
 
 
 # NEW THIS WEEK: AUTOMATIC VARIABLES
@@ -61,6 +61,12 @@ messagepasser: chunkystring.o message-passer.o noisy-transmission.o
 stringtest-limited.o: stringtest-limited.cpp chunkystring.hpp
 
 stringtest-limited: stringtest-limited.o testing-logger.o chunkystring.o iterator.o
+	$(CXX) -o $@ $^
+
+
+stringtest-complete.o: stringtest-complete.cpp chunkystring.hpp
+
+stringtest-complete: stringtest-complete.o testing-logger.o chunkystring.o iterator.o
 	$(CXX) -o $@ $^
 
 

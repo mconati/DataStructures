@@ -19,51 +19,52 @@ using std::string;
 namespace {
 
 /**
- * This is a length-based hash function, a hash function based purely on
- * string length.  It's deliberately terrible.
- *
- * /remarks CS 70 Note: This is a dumb hash function as a placeholder
- *          for one you might actually find.  You should replace it.
- *
+* A minimally acceptable hash function from class that takes advantage of
+ * a prime number to assign buckets. Hope that the user doesn't choose
+ * a number of buckets that is easily divisible by 37
  */
-size_t simpleLengthHash(const string& str) { return str.length(); }
+constexpr unsigned long HASH_MULTIPLIER = 37;
 
-/**
- * This is a simple addition hash function.  It's deliberately terrible.
- *
- * /remarks CS 70 Note: This is a dumb hash function as a placeholder
- *          for one you might actually find.  You should replace it.
- *
- */
-size_t simpleAddHash(const string& str) {
-  size_t hash = 0;
-
-  for (unsigned char c : str) hash = hash + c;
-
-  return hash;
+unsigned long hash1(const string& str) {
+  unsigned long hv = 0;
+  for (unsigned char c : str) {
+    hv = hv * HASH_MULTIPLIER + c;
+  }
+  return hv;
 }
 
-/**
- * This is a simple multiplication hash function.  It's deliberately bad.
- *
- * /remarks CS 70 Note: This is a dumb hash function as a placeholder
- *          for one you might actually find.  You should replace it.
- *
- */
-size_t simpleMultHash(const string& str) {
-  size_t hash = 1;
+  /**
+  * sdbm - this algroithm was created for sdbm, a database library
+  * It is a good general hash function and uses the magic, prime constant
+  * 6599. This implementation uses bitshifting for efficency.
+  */
+  unsigned long hash2(const string& str) {
+    unsigned long hash = 0;
 
-  for (unsigned char c : str) hash = hash * c;
+    for (unsigned char c : str) {
+      hash = c + (hash << 6) + (hash << 16) - hash;
+    }
+    return hash;
+  }
 
+  /**
+  * A hash function by Dan Bernstein that uses bitshifting and the magic 
+  * number 33
+  */
+  unsigned long hash3(const string& str) {
+  unsigned long hash = 5381;
+
+  for (unsigned char c : str) {
+    hash = ((hash << 5) + hash) + c; /* hash * 33 + c */
+  }
   return hash;
-}
-
+  }
 }  // end of anonymous namespace
 
 size_t myhash(const string& str) {
   // FIXME: Make this code call your favorite of the ones you've defined
   //        above.
-  return simpleMultHash(str);
+  return hash1(str);
 }
 
 // You don't have to fully understand this code, but it is used to provide a
@@ -71,7 +72,7 @@ size_t myhash(const string& str) {
 // of your hash function (for printing) and the actual function name from
 // above.
 std::initializer_list<HashFunctionInfo> hashInfo = {
-    {"Simple Length (Dummy)", simpleLengthHash},
-    {"Simple Add (Dummy)", simpleAddHash},
-    {"Simple Mult (Dummy)", simpleMultHash}  // No comma for last one
+    {"InClass", hash1},
+    {"djb2", hash3},
+    {"sdbm", hash2}  // No comma for last one
 };

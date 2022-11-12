@@ -76,7 +76,6 @@ int main(int argc, const char* argv[]) {
 
   std::ifstream fileReader(fileName);
 
-  // The file could not be opened
   if (!fileReader.is_open()) {
     std::cerr << "Unable to read from file" << fileName << std::endl;
     exit(-1);
