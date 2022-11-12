@@ -1,0 +1,29 @@
+/**
+ * \mainpage HW9: Implementing (the rest of) ChunkyString
+ *
+ * \tableofcontents
+ *
+ * \section intro_sec Introduction
+ *
+ * The C++ standard `string` is convenient for most applications, but
+ * vague about asymptotic complexity for its operations. While its
+ * often a waste of time to reimplement STL structures, in this case
+ * we want a string that can ensure efficiency in the following areas:
+ *   - Memory Usage
+ *   - Insertion of Characters
+ *   - Deletion of Characters
+ * 
+ * To satisfy this, we write a compromise between a linked-list of
+ * characters and an array of characters called ChunkyString.
+ *
+ * \section use_sec Usage
+ *
+ * The ChunkyString class can be used by writing `#include
+ * "chunkystring.hpp"` in any file. A test suite to assert the
+ * correctness of all operations implemented this week is provided
+ * in `stringtest-limited.cpp`. A full test suite (for all operations on
+ * ChunkyStrings, including erase and insert) is provided in
+ * `stringtest-complete.cpp`. 
+
+ *
+ */

@@ -1,0 +1,19 @@
+# Ignore compiled object files
+*.o
+*.dSYM
+
+# Ignore binary executable programs
+myspell
+*-test
+
+# Ignore doxygen output
+documentation
+
+# Ignore MacOS bookkeeping files
+.DS_Store
+._.DS_Store
+
+# Ignore backups/temporary/config files that editors might create
+*~
+\#*\#
+.vscode

@@ -1,0 +1,113 @@
+/**
+
+\mainpage HW 10: Spell Checking using Hash Tables
+
+\tableofcontents
+
+\section intro_sec Introduction
+
+The myspell program checks the spelling of input words against a user-specified
+dictionary. Suggested corrections are outputted to the screen. The simplest way
+to do so is to check if a word is in the dictionary; if not then see what words
+are most similar to it. However, for this program to be useful, a large
+dictionary of correct words is necessary. An efficient data structure must be
+used or the program is useless.
+
+\section usage Usage
+
+    ./myspell [-d] dict
+
+The optional flag -d will produce statistics about the data structure used to
+represent the dictionary, printed to standard error (cerr).  The HashTable
+statistics print in the following format:
+  
+     n expansions, load factor f, c collisions, longest run l
+
+where n, c, and l are integers, and f is a floating-point (double) number.
+This output should be followed by a newline.
+
+The positional argument dict is the name of the dictionary file. This
+file must be a sequence of unique lowercase words separated by whitespace,
+where a 'word' begins and ends with a letter and contains no spaces. Words
+may occur in any order in the dictionary file, but should not be
+duplicated.
+
+\subsection in_sec Input
+
+Input is read from standard input (cin). If input comes from the keyboard, the
+program continues to read words until the EOF character is encountered
+(Control-D on Mac OS X and Unix computers, Control-Z on Windows).
+
+Alternatively, we can tell the shell to run the command while directing 
+the contents of a file into standard input
+
+    ./myspell [-d] dict  < inputfile.txt
+
+in which case spell checking of the words in inputfile.txt continues until the
+end of that file is reached.
+
+\subsection out_sec Output
+
+Any word in the input that is not found in the dictionary will be
+sent to standard output (cout) in the following format:
+
+     misspelledWord: correction1 correction2 correction3 . . .
+
+If there are no suggested corrections then only the misspelled word
+and a colon (no whitespace) is outputted.
+
+Corrections appear as soon as they are detected (rather than waiting
+until the entire input has been read) and so misspelled words are reported
+in the same order they were encountered (e.g., not sorted alphabetically). In
+particular, if input comes from the keyboard, corrections for each line
+should appear as soon as the line is entered. 
+
+However words that are misspelled the same way more than once (in the same run
+of the program) are reported only the first time they are encountered.
+
+\subsection sample_output Sample Output
+
+This is a sample run of a correctly working myspell program. Note that this
+example does not cover all edge cases, but is instead meant to demonstrate
+formatting. Please ask the graders for more direction if the formatting is
+unclear for any situtation not shown here.
+
+None of the following lines contain a space before the newline (including
+the blank line). The input was terminated using Ctrl-D, which would appear
+as additional blank (input) line after the "yay: bay" line.
+
+The debugging line (15 expansions...) is sent to cerr. The other lines
+go to cout.
+
+\verbatim
+% ./myspell -d ispell.words
+15 expansions, load factor 0.531479, 7857 collisions, longest run 6
+This is a sentence spelled incorrrectluy.
+incorrrectluy:
+This is a sentence spelled correctly.
+The next input will be a blank line.
+
+yay! Yay?
+yay: bay day gay hay jay lay may nay pay ray say way
+
+\endverbatim
+
+
+\section design Design Notes
+
+\subsection hashfunction Our Hash Function
+
+...here you would briefly introduce the three hash functions
+you experimented with, the tests you ran, and the results that
+caused you to make your choice...
+
+\subsection hashtable Our Hash Table
+
+...here you would (very) briefly explain what kind of hash table you
+implemented, and why you chose it...
+
+...here you would briefly state the load factor you settled on,
+and your justification for choosing that particular value...
+
+*/
+
